@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost:3000";
 
 
 
-async function request(path, options = {}) {
+export async function request(path, options = {}) {
 
     const controller = new AbortController();
 
@@ -14,19 +14,65 @@ async function request(path, options = {}) {
     try {
         const response = await fetch(BASE_URL + path, {
             ...options,
-            headers: {
-                "Content-Type": "application/json"
-            },
+           headers: {
+    "Content-Type": "application/json",
+    ...options.headers
+},
             signal: controller.signal
         });
 
         if (!response.ok) {
-            throw new Error("Erreur HTTP");
+            throw {
+                type: "http",
+                status: response.status,
+                message: "Erreur HTTP : " + response.status
+            }
+        }
+         let data;
+
+        try {
+            data = await response.json();
+
+        } catch (error) {
+            throw {
+                type: "parse",
+                status: response.status,
+                message: "Impossible de lire les données JSON"
+            };
         }
 
-        const data = await response.json();
-
         return data;
+ } catch (error) {
+
+        // Timeout
+        if (error.name === "AbortError") {
+            throw {
+                type: "timeout",
+                status: null,
+                message: "La requête a dépassé 8 secondes"
+            };
+        }
+
+ // Erreurs déjà normalisées
+        if (error.type) {
+            throw error;
+        }
+
+        // Offline
+        if (!navigator.onLine) {
+            throw {
+                type: "offline",
+                status: null,
+                message: "Aucune connexion Internet"
+            };
+        }
+
+        // Network error
+        throw {
+            type: "network",
+            status: null,
+            message: "Erreur de connexion au serveur"
+        };
 
     } finally {
         clearTimeout(timeout);
@@ -37,44 +83,24 @@ async function request(path, options = {}) {
 
 export async function getproduct() {
     try {
-        const response = await fetch(`${BASE_URL}/articles`);
-        const data = await response.json();
-
-        const container = document.getElementById("products");   
-
-        container.replaceChildren();
-
-        data.forEach(pro => {
-            const card = document.createElement("div");
-            card.classList.add("product", "card");
-
-            const image = document.createElement("img");
-            image.src = pro.image;
-            image.alt = pro.title;
-
-            const title = document.createElement("h3");
-            title.textContent = pro.title;
-
-            const description = document.createElement("p");
-            description.textContent = pro.description;
-
-            const price = document.createElement("span");
-            price.classList.add("price");
-            price.textContent = `${pro.price} MAD`;
-
-            card.appendChild(image);
-            card.appendChild(title);
-            card.appendChild(description);
-            card.appendChild(price);
-
-            container.appendChild(card);
-        });
+        const data = await request("/articles");
+        return data;
 
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Erreur GET articles :", error);
+        throw error;
     }
 }
 
-getproduct();
+export async function getProductById(id) {
+    try {
+        const data = await request(`/articles/${id}`);
+        return data;
+
+    } catch (error) {
+        console.error("Erreur GET article :", error);
+        throw error;
+    }
+}
 
 

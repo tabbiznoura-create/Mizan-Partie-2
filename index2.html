@@ -39,7 +39,6 @@
 
     <!-- Page Dashboard -->
     <section id="dashboard" class="page active">
-        <p>test</p>
         <h2>Tableau de bord</h2>
         <p>Bienvenue dans votre espace de gestion.</p>
     </section>
@@ -48,9 +47,31 @@
     <section id="catalogue" class="page">
         <h2>Catalogue des articles</h2>
         <p>Gérez vos bijoux, lingots et pièces.</p>
+<div class="filters">
 
+    <input
+        type="text"
+        id="recherche"
+        placeholder="Rechercher un article..."
+    >
+
+    <select id="filtre-statut">
+        <option value="all">Tous les statuts</option>
+        <option value="disponible">Disponible</option>
+        <option value="réservé">Réservé</option>
+    </select>
+
+    <select id="tri">
+        <option value="default">Tri par défaut</option>
+        <option value="title">Par titre</option>
+        <option value="price">Par prix</option>
+        <option value="date">Par date</option>
+    </select>
+
+</div>
         <div id="products" class="products-container">
             <!-- Les articles seront ajoutés avec JavaScript -->
+
         </div>
     </section>
 
