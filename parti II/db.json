@@ -1,0 +1,30 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "title": "Bague en or",
+      "description": "Bague en or 18 carats",
+      "category": "Bague",
+      "material": "Or",
+      "weight": 5.5,
+      "purity": "18 carats",
+      "price": 2500,
+      "status": "disponible",
+      "image": "./assets/images/bague.jpg",
+      "createdAt": "2026-11-18"
+    },
+    {
+      "id": "2",
+      "title": "Collier en argent",
+      "description": "Collier en argent sterling",
+      "category": "Collier",
+      "material": "Argent",
+      "weight": 12,
+      "purity": "925",
+      "price": 800,
+      "status": "réservé",
+      "image": "./assets/images/collier.jpg",
+      "createdAt": "2026-11-17"
+    }
+  ]
+}

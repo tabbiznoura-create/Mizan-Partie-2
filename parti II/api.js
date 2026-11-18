@@ -1,34 +1,80 @@
-async function getproduct(){
-    try{
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-        const data = await res.json();
-        // console.log(data)
 
-        const container = document.getElementById("products")
+const BASE_URL = "http://localhost:3000";
 
 
-        data.products.foreach(pro =>{
 
-            const card = document.createElement("div");
-            card.classList.add("product card")
+async function request(path, options = {}) {
 
-            const title = document.createElement("h3")
+    const controller = new AbortController();
 
+    const timeout = setTimeout(function () {
+        controller.abort();
+    }, 8000);
 
-            card.innerHTML = `
-            <img src="${pro.image}" />
-            <p>${pro.description}<p/>
-            <span class="price">$${pro.price}</span>
-            `
+    try {
+        const response = await fetch(BASE_URL + path, {
+            ...options,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            signal: controller.signal
+        });
 
-            container.appendChild(container)
+        if (!response.ok) {
+            throw new Error("Erreur HTTP");
+        }
 
-        })
+        const data = await response.json();
 
-    }catch (error) {
-        console.error("Error" , error)
+        return data;
 
+    } finally {
+        clearTimeout(timeout);
     }
 }
 
-getproduct()
+
+
+export async function getproduct() {
+    try {
+        const response = await fetch(`${BASE_URL}/articles`);
+        const data = await response.json();
+
+        const container = document.getElementById("products");   
+
+        container.replaceChildren();
+
+        data.forEach(pro => {
+            const card = document.createElement("div");
+            card.classList.add("product", "card");
+
+            const image = document.createElement("img");
+            image.src = pro.image;
+            image.alt = pro.title;
+
+            const title = document.createElement("h3");
+            title.textContent = pro.title;
+
+            const description = document.createElement("p");
+            description.textContent = pro.description;
+
+            const price = document.createElement("span");
+            price.classList.add("price");
+            price.textContent = `${pro.price} MAD`;
+
+            card.appendChild(image);
+            card.appendChild(title);
+            card.appendChild(description);
+            card.appendChild(price);
+
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+getproduct();
+
+

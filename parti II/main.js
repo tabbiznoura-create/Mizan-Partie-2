@@ -1,3 +1,4 @@
+import { getproduct } from "./api.js";
 const buttons = document.querySelectorAll(".nav-button")
 const pages = document.querySelectorAll(".page")
 
@@ -19,3 +20,4 @@ buttons.forEach(button => {
         button.classList.add("active")
     })
 })
+getproduct();
