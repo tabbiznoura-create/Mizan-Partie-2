@@ -23,6 +23,26 @@ html {
     
 }
 
+
+.img {
+    width: 60%;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.icone {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
 /* Body */
 body {
     background-color: var(--mizan-bg);
@@ -54,10 +74,13 @@ body {
 }
 .header-container {
     max-width: 1100px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
+
 .header-description {
     color: var(--mizan-gray);
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="./parti II/style2.css">
+</head>
+<body>
+     <header class="main-header">
+        <div class="header-container">
+            <p class="logo">Mizan</p>
+            <p class="header-description">
+                Gestion de bijouterie</p>
+       
+
+            <div class = "navbar">
+                <img src="./parti II/assets/icone/1.png" alt="icone d'inscription" class = "icone">
+                <img src="./parti II/assets/images/2.jpg" alt="image de profile" class="img">
+            </div>
+      </div>
+    </header>
+
+<main>
+    <nav class="navigation">
+        <button class="nav-button active" data-page="dashboard">
+            Dashboard
+        </button>
+
+        <button class="nav-button" data-page="catalogue">
+            Catalogue
+        </button>
+
+        <button class="nav-button" data-page="reservations">
+            Réservations
+        </button>
+    </nav>
+
+    <!-- Page Dashboard -->
+    <section id="dashboard" class="page active">
+        <p>test</p>
+        <h2>Tableau de bord</h2>
+        <p>Bienvenue dans votre espace de gestion.</p>
+    </section>
+
+    <!-- Page Catalogue -->
+    <section id="catalogue" class="page">
+        <h2>Catalogue des articles</h2>
+        <p>Gérez vos bijoux, lingots et pièces.</p>
+
+        <div id="products" class="products-container">
+            <!-- Les articles seront ajoutés avec JavaScript -->
+        </div>
+    </section>
+
+    <!-- Page Réservations -->
+    <section id="reservations" class="page">
+        <h2>Gestion des réservations</h2>
+    </section>
+
+
+    <a href="index.html">
+        <button>Retour</button>
+            </a>
+</main>
+
+<footer class="footer">
+    <p>
+        Mizan - tableau de bord des cours des métaux précieux
+    </p>
+
+    <p>
+        Données fournies par Goldprice.dev
+    </p>
+   </footer>
+
+    <script src="./parti II/main.js"></script>   
+</body>
+</html>
