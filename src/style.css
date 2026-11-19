@@ -23,6 +23,13 @@ html {
     
 }
 
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
 /* Body */
 body {
     background-color: var(--mizan-bg);
@@ -54,10 +61,13 @@ body {
 }
 .header-container {
     max-width: 1100px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
+
 .header-description {
     color: var(--mizan-gray);
 }
