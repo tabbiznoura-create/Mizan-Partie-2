@@ -1,4 +1,4 @@
-import { getproduct } from "./api.js";
+import { getproduct, getProductById } from "./api.js";
 const buttons = document.querySelectorAll(".nav-button")
 const pages = document.querySelectorAll(".page")
 
@@ -27,6 +27,8 @@ buttons.forEach(button => {
     })
 })
 
+
+
 function displayProducts(products) {
 
     const container = document.getElementById("products");
@@ -52,10 +54,27 @@ function displayProducts(products) {
         price.classList.add("price");
         price.textContent = `${pro.price} MAD`;
 
+            // voir les details
+const detailsButton = document.createElement("button");
+
+detailsButton.textContent = "Voir détails";
+
+detailsButton.addEventListener("click", async function () {
+    try {
+        const article = await getProductById(pro.id);
+
+        console.log(article);
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+
         card.appendChild(image);
         card.appendChild(title);
         card.appendChild(description);
         card.appendChild(price);
+        card.appendChild(detailsButton);
 
         container.appendChild(card);
     });

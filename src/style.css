@@ -23,19 +23,6 @@ html {
     
 }
 
-
-.img {
-    width: 60%;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 100%;
-}
-
-.icone {
-    width: 20px;
-    height: 20px;
-    object-fit: cover;
-}
 .navbar {
     display: flex;
     align-items: center;

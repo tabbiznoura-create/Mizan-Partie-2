@@ -2,6 +2,35 @@
 const BASE_URL = "http://localhost:3000";
 
 
+export async function getproduct() {
+    try {
+        const data = await request("/articles");
+        return data;
+
+    } catch (error) {
+        console.error("Erreur GET articles :", error);
+        throw error;
+    }
+}
+
+export async function getProductById(id) {
+    try {
+        const data = await request(`/articles/${id}`);
+        return data;
+
+    } catch (error) {
+        console.error("Erreur GET article :", error);
+        throw error;
+    }
+}
+
+
+export async function addProduct(product) {
+    return await request("/articles", {
+        method: "POST",
+        body: JSON.stringify(product)
+    });
+}
 
 export async function request(path, options = {}) {
 
@@ -78,29 +107,3 @@ export async function request(path, options = {}) {
         clearTimeout(timeout);
     }
 }
-
-
-
-export async function getproduct() {
-    try {
-        const data = await request("/articles");
-        return data;
-
-    } catch (error) {
-        console.error("Erreur GET articles :", error);
-        throw error;
-    }
-}
-
-export async function getProductById(id) {
-    try {
-        const data = await request(`/articles/${id}`);
-        return data;
-
-    } catch (error) {
-        console.error("Erreur GET article :", error);
-        throw error;
-    }
-}
-
-
